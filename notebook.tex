@@ -1,0 +1,916 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Relat?rio-Copy2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{o}{\PYZpc{}}\PY{n+nx}{javascript}
+        \PY{n+nx}{MathJax}\PY{p}{.}\PY{n+nx}{Hub}\PY{p}{.}\PY{n+nx}{Config}\PY{p}{(}\PY{p}{\PYZob{}}
+            \PY{n+nx}{TeX}\PY{o}{:} \PY{p}{\PYZob{}} \PY{n+nx}{equationNumbers}\PY{o}{:} \PY{p}{\PYZob{}} \PY{n+nx}{autoNumber}\PY{o}{:} \PY{l+s+s2}{\PYZdq{}AMS\PYZdq{}} \PY{p}{\PYZcb{}} \PY{p}{\PYZcb{}}\PY{p}{,}
+            \PY{n+nx}{tex2jax}\PY{o}{:} \PY{p}{\PYZob{}}
+                \PY{n+nx}{inlineMath}\PY{o}{:} \PY{p}{[} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}\PYZdl{}\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}\PYZdl{}\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}\PYZbs{}\PYZbs{}(\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}\PYZbs{}\PYZbs{})\PYZdq{}}\PY{p}{]} \PY{p}{]}\PY{p}{,}
+                \PY{n+nx}{displayMath}\PY{o}{:} \PY{p}{[} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}\PYZdl{}\PYZdl{}\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}\PYZdl{}\PYZdl{}\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}\PYZbs{}\PYZbs{}[\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}\PYZbs{}\PYZbs{}]\PYZdq{}}\PY{p}{]} \PY{p}{]}\PY{p}{,}
+                \PY{n+nx}{processEscapes}\PY{o}{:} \PY{k+kc}{true}\PY{p}{,}
+                \PY{n+nx}{processEnvironments}\PY{o}{:} \PY{k+kc}{true}
+            \PY{p}{\PYZcb{}}\PY{p}{,}
+            \PY{n+nx}{displayAlign}\PY{o}{:} \PY{l+s+s1}{\PYZsq{}center\PYZsq{}}\PY{p}{,} \PY{c+c1}{// Change this to \PYZsq{}center\PYZsq{} to center equations.     }
+            \PY{l+s+s2}{\PYZdq{}HTML\PYZhy{}CSS\PYZdq{}}\PY{o}{:} \PY{p}{\PYZob{}}
+                \PY{n+nx}{styles}\PY{o}{:} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}.MathJax\PYZus{}Display\PYZsq{}}\PY{o}{:} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}margin\PYZdq{}}\PY{o}{:} \PY{l+m+mi}{500}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}
+            \PY{p}{\PYZcb{}}
+        \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using matplotlib backend: TkAgg
+
+    \end{Verbatim}
+
+    \hypertarget{primeira-questuxe3o}{%
+\subsubsection{Primeira Questão}\label{primeira-questuxe3o}}
+
+\hypertarget{a-modelo-matemuxe1tico}{%
+\paragraph{a) Modelo matemático}\label{a-modelo-matemuxe1tico}}
+
+Faremos então a dedução do primeiro problema tomando as seguintes
+variáveis
+
+\(Q\) - concentração\\
+\(Z\) - vazão\\
+\(V\) - volume\\
+\(S\) - quantidade de sal
+
+Para determinar a concentração \(Q(t)\) em um dado momento qualquer,
+faremos \begin{equation}
+    \label{eq_concentracao}
+    Q(t) = \frac{S(t)}{V(t)}
+\end{equation}
+
+onde:
+
+\begin{equation}
+    \label{eq_volume}
+    V(t) = V_{0} + (Z_{in} - Z_{out})t
+\end{equation}
+
+Sabemos que a variação da quantidade de sal \(dS(t)\) é dada pela
+diferença entre a entrada e a saída de sal em um dado instante t, isto é
+
+\begin{equation*}
+    \label{eq_var_qtd_sal}
+    dS(t) = S_{in} - S_{out}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_var_qtd_sal_2}
+    \frac{dS(t)}{dt} = \frac{dS_{in}}{dt} - \frac{dS_{out}}{dt}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_var_qtd_sal_3}
+    \frac{dS(t)}{dt} = \frac{d(Q_{in}(t) \cdot V_{in}(t))}{dt} - \frac{d(Q_{out}(t) \cdot V_{out}(t))}{dt}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_var_qtd_sal_4}
+    S'(t) = (Q'_{in}(t) \cdot V_{in}(t) + Q_{in}(t) \cdot V'_{in}(t)) - (Q'_{out}(t) \cdot V_{out}(t) + Q_{out}(t) \cdot V'_{out}(t))
+\end{equation*}
+
+Assumindo que a água que entra no tanque é pura, a concentração de
+entrada \(Q_{in}\) é zero, então
+
+\begin{equation*}
+    \label{eq_var_qtd_sal_5}
+    S'(t) = - (Q'_{out}(t) \cdot V_{out}(t) + Q_{out}(t) \cdot V'_{out}(t))
+\end{equation*}
+
+Uma vez que a massa de água que sai em um instante estacionário é nula,
+podemos assumir que o termo \(Q'_{out}(t) \cdot V_{out}(t) = 0\), que
+nos deixa com o seguinte resultado \begin{equation*}
+    S'(t) = - Q_{out}(t) \cdot V'_{out}(t)
+\end{equation*}
+
+Contudo, sabemos que a vazão é dada por meio de: \begin{equation}
+    \label{eq_vazao}
+    Z(t) = V'(t)
+\end{equation}
+
+Assim, assumimos por meio de \eqref{eq_vazao} que \(S'(t)\) é dada pela
+concentração de sal no tanque \(S(t)\) multiplicado pela vazão de saída
+do tanque \(V_{out}\)
+
+\begin{equation}
+    \label{eq_var_qtd_sal_6}
+    S'(t) = - Q(t) \cdot Z_{out}
+\end{equation}
+
+Substituindo \eqref{eq_concentracao} e \eqref{eq_volume} em
+\eqref{eq_var_qtd_sal_6}, teremos:
+
+\begin{equation}
+    \label{eq_var_qtd_sal_7}
+    S'(t) = - \frac{S(t)}{V(t)} \cdot Z_{out}
+\end{equation}
+
+Assim, nossa EDO será:
+
+\begin{equation}
+    \label{edo1}
+    S'(t) + \frac{Z_{out}}{V_{0} + (Z_{in} - Z_{out})t} \cdot S(t) = 0
+\end{equation}
+
+Com a substituição dos valores dados na questão em \eqref{edo1},
+teremos:
+
+\begin{equation}
+    \label{edo_com_valores}
+    S'(t) + \frac{4}{100+2t} \cdot S(t) = 0
+\end{equation}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Em posse dessa equação diferencial podemos realizar os procedimentos
+para determinar qual sua solução exata para a quantidade de sal no
+tanque \(S(t)\) em um dado instante \(t\). Para isto podemos resolver
+como uma equação diferencial trivial: \begin{equation*}
+    \frac{dS(t)}{dt} = - \frac{4}{100+2t} \cdot S(t) \therefore \frac{dS(t)}{S(t)} = - \frac{4dt}{100+2t}
+\end{equation*} Segue que:
+
+\begin{equation*}
+    \int{\frac{dS(t)}{S(t)}} = - \int{\frac{4dt}{100+2t}}
+\end{equation*}
+
+\begin{equation}
+    \label{edo_com_valores_sol}
+    \ln(S(t)) = - 4\int{\frac{dt}{100+2t}}
+\end{equation} A integral \(\int{\frac{4dt}{100+2t}}\) pode ser
+resolvida por substituição fazendo: \begin{equation*}
+    u = 100 + 2t \therefore du = 2dt \therefore dt = \frac{du}{2}
+\end{equation*} Realizando a substituição em \eqref{edo_com_valores_sol}
+\begin{align*}
+    \ln(S(t)) &= - 4\int{\frac{du}{2u}} & \\
+    \ln(S(t)) &= - 2\ln{u} &\\
+    \ln(S(t)) &= - 2 \cdot \ln(100 + 2t) + C 
+\end{align*}\\
+Removendo o logarítmo, concluimos então que
+\(S(t) = e^{C}\cdot(100 + 2t)^{-2}\)\\
+Que pode ser reescrito como: \begin{equation}
+    \label{edo_com_valores_sol_1}
+    S(t) = \frac{C}{(100 + 2t)^{2}} \text{, onde C é uma constante arbitrária}
+\end{equation} Como a quantidade de sal inicial no tanque de água é dada
+por \(S(0) = 30\), podemos concluir que para esse PVI(Problema de valor
+Inicial) a constante C será descrita por: \begin{align*}
+    30 &= \frac{C}{(100 + 2 \cdot 0)^{2}}  & \\
+    C &= 30 \cdot 100^{2} & \\ 
+    C &= 3 \cdot 10^{5}
+\end{align*}\\
+O que nos deixa com a equação \begin{equation}
+    \label{edo_com_valores_sol_2}
+    S(t) = \frac{3 \cdot 10^{5}}{(100 + 2t)^{2}} \text{, onde C é uma constante arbitrária}
+\end{equation}
+
+\hypertarget{concentrauxe7uxe3o-de-sal-em-50-minutos}{%
+\paragraph{Concentração de sal em 50
+minutos}\label{concentrauxe7uxe3o-de-sal-em-50-minutos}}
+
+E podemos aplicar essa equação para determinar o valor \(S(50)\):
+\begin{equation*}
+    \label{edo_com_valores_sol_3}
+    S(t) = \frac{3 \cdot 10^{5}}{(100 + 2 \cdot 50)^{2}}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_com_valores_sol_4}
+    S(t) = \frac{3 \cdot 10^{5}}{4\cdot 10^{4}}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_com_valores_sol_5}
+    S(t) = 7.5 g
+\end{equation*}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{c-limite-no-infinito-para-esse-problema}{%
+\paragraph{c) Limite no infinito para esse
+problema}\label{c-limite-no-infinito-para-esse-problema}}
+
+Aplicamos o limite no infinito sobre \eqref{edo_com_valores_sol_2} para
+estudar o comportamento assintótico da função sobre o infinito, que
+resulta em: \begin{equation*}
+    \displaystyle{\lim_{t \to +\infty}} \frac{3 \cdot 10^{5}}{(100 + 2t)^{2}}
+\end{equation*} Que é um limite polinomial clássico e que nos dá como
+resultado que \begin{equation*}
+    \displaystyle{\lim_{t \to +\infty}} \frac{3 \cdot 10^{5}}{(100 + 2t)^{2}} = 0
+\end{equation*}\\
+Essa solução nos permite interpretar que em um longo período de tempo o
+sistema tende a alcançar o equilíbrio com a concentração de sal que
+estava presente na água que entra, isto é, o sistema tende
+assintóticamente a se tornar um sistema com água pura.
+
+    \hypertarget{segunda-questuxe3o}{%
+\subsubsection{Segunda Questão}\label{segunda-questuxe3o}}
+
+\hypertarget{resolvendo-a-edo}{%
+\paragraph{Resolvendo a EDO}\label{resolvendo-a-edo}}
+
+Segundo a Lei de Resfriamento de Newton,
+
+\begin{equation}
+    \label{eq_newton}
+    T' = -k \cdot (T - T_{a})
+\end{equation}
+
+Onde,\\
+\(T\) - temperatura do corpo no instante t\\
+\(T_{a}\) - temperatura constante do ambiente\\
+\(t\) - tempo\\
+\(k\) - constante
+
+Resolvendo a EDO, teremos: \begin{equation*}
+    \label{eq_newton_1}
+    \frac{dT}{dt} = -k \cdot (T - T_{a})
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_2}
+    \frac{1}{T - T_{a}} \cdot dT = -k \cdot dt
+\end{equation*}
+
+Integrando os dois lados
+
+\begin{equation*}
+    \label{eq_newton_3}
+    \int\frac{1}{T - T_{a}} \cdot dT = -\int k \cdot dt
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_4}
+    \ln(T - T_{a}) = - kt + C_{2} - C_{1}
+\end{equation*}
+
+Para tirar o \(\ln(T - T_{a})\), faremos
+
+\begin{equation*}
+    \label{eq_newton_5}
+    e^{ln(T - T_{a})} = e^{-kt + c}
+\end{equation*}
+
+Logo,
+
+\begin{equation*}
+    T - T_{a} = e^{-kt} \cdot e^{c}
+\end{equation*}
+
+\begin{equation}
+    \label{eq_newton_6}
+    T - T_{a} = e^{-kt} \cdot C
+\end{equation}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{a-determinando-o-tempo-da-morte}{%
+\paragraph{a) Determinando o tempo da
+morte}\label{a-determinando-o-tempo-da-morte}}
+
+Para encontrar o valor da constante \(C\), usaremos a informação dada de
+que \(T(0) = 30^{\circ}C\) e \(T_{a} = 20^{\circ}C\), ou seja
+
+\begin{equation*}
+    \label{eq_achar_k_1}
+    30 - 20 = e^{-k \cdot 0} \cdot C
+\end{equation*}
+
+\begin{equation}
+    \label{eq_achar_k_2}
+    C = 10
+\end{equation}
+
+Substituindo \eqref{eq_achar_k_2} em \eqref{eq_newton_6},
+\begin{equation}
+    \label{eq_newton_7}
+    T - T_{a} = e^{-kt} \cdot 10
+\end{equation}
+
+A outra informação dada no problema nos permitirá encontrar a constante
+\(k\):
+
+Sabendo que em \(T(2) = 23^{\circ}C\),
+
+\begin{equation*}
+    \label{eq_newton_8}
+    23 - 20 = e^{-2k} \cdot 10
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_9}
+    \frac{3}{10} = e^{-2k}
+\end{equation*}
+
+Aplicando \(ln\) nos dois lados,
+
+\begin{equation*}
+    \label{eq_newton_10}
+    \ln(\frac{3}{10}) = \ln(e^{-2k})
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_11}
+    \ln(\frac{3}{10}) = -2k
+\end{equation*}
+
+Achamos \(k\):
+
+\begin{equation*}
+    k = -\frac{1}{2}\ln(\frac{3}{10})
+\end{equation*}
+
+\begin{equation}
+    \label{eq_achou_k}
+    k = \frac{1}{2}\ln(\frac{10}{3})
+\end{equation}
+
+Agora em posse dessas informações poderemos substituir a constante \(k\)
+encontrada em \eqref{eq_newton_7}, deduzindo assim a equação final
+\begin{equation}
+    \label{eq_newton_final}
+    T - T_{a} = 10e^{\frac{1}{2}\ln(\frac{10}{3})t}
+\end{equation}
+
+Agora que possuimos as constantes, poderemos determinar a hora
+aproximada do crime substituindo os valores dados em
+\eqref{eq_newton_final}:
+
+\begin{equation*}
+    \label{eq_newton_subst_1}
+    37 - 20 = 10e^{-\frac{1}{2}\ln(\frac{10}{3})t}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_subst_2}
+    17 = 10e^{\frac{1}{2}\ln(\frac{10}{3})t}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_subst_3}
+    \frac{17}{10} = e^{\frac{1}{2}\ln(\frac{10}{3})t}
+\end{equation*}
+
+Aplicando \(ln\): \begin{equation*}
+    \label{eq_newton_subst_4}
+    \ln(\frac{17}{10}) = \frac{1}{2}\ln(\frac{10}{3})t
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_subst_5}
+    2\ln(\frac{17}{10}) = \ln(\frac{10}{3})t
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_subst_6}
+    2\ln(1.7) = \ln(10) - \ln(3)t
+\end{equation*}
+
+Encontramos t: \begin{equation*}
+    \label{eq_newton_subst_7}
+    t = 2\frac{\ln(1.7)}{\ln(10) - \ln(3)}
+\end{equation*}
+
+Sabemos que \(ln(1.7) \simeq 0.53\), \(ln(10) \simeq 2.3\) e
+\(ln(3) = 1.1\), \begin{equation*}
+    \label{eq_newton_subst_8}
+    t = 2 \cdot\frac{0.53}{1.2}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_subst_9}
+    t \simeq 0.88 \text{ horas}
+\end{equation*}
+
+Em minutos, \(t_{min} = t \cdot 60\), ou seja,
+
+\begin{equation*}
+    \label{eq_newton_subst_resp}
+    t_{min} \simeq 53 \text{ minutos}
+\end{equation*}
+
+Sabemos que o corpo levou cerca de 53 minutos para sair de
+\(37^{\circ}C\) para a temperatura de \(30^{\circ}C\), ou seja, a morte
+ocorreu por volta de 53 minutos antes dele ter sido encontrado.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{b-de-100circ-a-30circ}{%
+\paragraph{\texorpdfstring{b) De \(100^{\circ}\) a
+\(30^{\circ}\)}{b) De 100\^{}\{\textbackslash{}circ\} a 30\^{}\{\textbackslash{}circ\}}}\label{b-de-100circ-a-30circ}}
+
+Consideramos esses valores para deduzir as questões conforme a solução
+anterior:\\
+\(T_{a} = 20^{\circ}C\)\\
+\(T(0) = 100^{\circ}C\)\\
+\(T(20) = 60^{\circ}C\)
+
+Conforme o procedimento realizado anteriormente encontraremos o \(C\)
+substituindo os valores de \(T(0)\) e \(T_{a}\) acima em
+\eqref{eq_newton_6}
+
+\begin{equation*}
+    \label{eq_newton_subst_ec*}
+    100 - 20 = e^{-k \cdot 0} \cdot C
+\end{equation*}
+
+\begin{equation}
+    \label{eq_newton_achou_ec_b}
+    C = 80
+\end{equation}
+
+Agora encontraremos \(k\) substituindo os valores de \(e^{c}\),
+\(T(20)\) e \(T_{a}\) acima em \eqref{eq_newton_6}
+
+\begin{equation*}
+    \label{eq_newton_subst_k}
+    60 - 20 = 80e^{-20k}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_subst_k1}
+    1/2 = e^{-20k}
+\end{equation*}
+
+Aplicando \(ln\) nos dois lados da equação: \begin{equation*}
+    \label{eq_newton_subst_k2}
+    \ln(1/2) = -20k
+\end{equation*}
+
+Achamos o valor da constante \(k\):
+
+\begin{equation*}
+    k = -\frac{1}{20}\ln(1/2)
+\end{equation*}
+
+\begin{equation}
+    \label{eq_newton_achou_k_b}
+    k = \frac{1}{20}\ln(2)
+\end{equation}
+
+Substituindo os valores encontrados de \(T_{a}\), \(k\) e \(C\) em
+\eqref{eq_newton_6}, obtemos a equação do corpo abaixo \begin{equation}
+    \label{eq_newton_final_b}
+    T - 20 = 80e^{-\frac{1}{20}\ln(2)t}
+\end{equation}
+
+O tempo necessário para a temperatura chegar 30˚C será dado por
+\begin{equation*}
+    \label{eq_newton_final_b_1}
+    30 - 20 = 80e^{-\frac{1}{20}\ln(2)t}
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_final_b_2}
+    1/8 = e^{-\frac{1}{20}\ln(2)t}
+\end{equation*}
+
+Aplicando o \(ln\)
+
+\begin{equation*}
+    \label{eq_newton_final_b_3}
+    \ln(1/8) = -\frac{1}{20}\ln(2)t
+\end{equation*}
+
+\begin{equation*}
+    \label{eq_newton_final_b_4}
+    t = -20 \cdot \frac{\ln(1/8)}{\ln(2)}
+\end{equation*}
+
+\begin{equation*}
+    t = 20 \cdot \frac{\ln(8)}{\ln(2)}
+\end{equation*}
+
+\begin{equation*}
+    t = 20 \cdot \frac{3 \cdot \ln(2)}{\ln(2)}
+\end{equation*}
+
+\begin{equation}
+    \label{eq_newton_achou_t}
+    t = 60 \text{ minutos}
+\end{equation}
+
+O que nos permite saber que o corpo leva cerca de 60 minutos para ir de
+\(100^{\circ}C\) até \(30^{\circ}C\)
+
+    \hypertarget{terceira-questuxe3o}{%
+\subsubsection{Terceira Questão}\label{terceira-questuxe3o}}
+
+\hypertarget{b-resolvendo-a-edo}{%
+\paragraph{b) Resolvendo a EDO}\label{b-resolvendo-a-edo}}
+
+Analisando a EDO dada na questão:
+
+\begin{equation}
+    \label{edo_3}
+    V'(t) = \frac{2000 - 2V(t)}{200 - t}
+\end{equation}
+
+Teremos \begin{equation*}
+    \label{edo_3_1}
+    \frac{dV}{dt} = \frac{2000 - 2V(t)}{200 - t}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_3_2}
+    \frac{dV}{2000 - 2V} = \frac{dt}{200 - t}
+\end{equation*}
+
+Integrando os dois lados, teremos
+
+\begin{equation*}
+    \label{edo_3_3}
+    \int\frac{1}{2000 - 2V}dV = \int\frac{1}{200 - t}dt
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_3_4}
+    -\frac{1}{2}\ln(2000 - 2V) + C_{1} = -\ln(200 - t) + C_{2}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_3_5}
+    \frac{1}{2}\ln(2000 - 2V) = \ln(200 - t) + c
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_3_6}
+    e^{\frac{1}{2}\ln(2000 - 2V)} = e^{\ln(200 - t) + c}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_3_7}
+    e^{\ln((2000 - 2V)^{\frac{1}{2}})} = e^{\ln(200 - t)}e^{c}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_3_8}
+    (2000 - 2V)^{\frac{1}{2}} = (200 - t) \cdot e^{c}
+\end{equation*}
+
+Elevando os dois lados a \(2\) para retirar o \(\frac{1}{2}\)
+
+\begin{equation*}
+    \label{edo_3_9}
+    ((2000 - 2V)^{\frac{1}{2}})^{2} = ((200 - t) \cdot e^{c})^{2}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_3_10}
+    2000 - 2V = e^{2c}(200 - t)^{2}
+\end{equation*}
+
+\begin{equation*}
+    V = \frac{2000 - e^{2c}(200 - t)^{2}}{2}
+\end{equation*}
+
+Assumindo que \(e^{ec} = C\)
+
+\begin{equation}
+    \label{edo_3_11}
+    V = \frac{2000 - C(200 - t)^{2}}{2}
+\end{equation}
+
+Sabendo que \(V(0) = 0\), teremos
+
+\begin{equation*}
+    \label{edo_3_12}
+    C(200)^{2} = 2000
+\end{equation*}
+
+\begin{equation*}
+    C = \frac{2000}{40000}
+\end{equation*}
+
+\begin{equation}
+    \label{edo_3_13}
+    C = \frac{1}{20}
+\end{equation}
+
+Substituindo \eqref{edo_3_13} em \eqref{edo_3_11}
+
+\begin{equation}
+    \label{edo_final}
+    V = \frac{2000 - \frac{1}{20} \cdot (200 - t)^{2}}{2}
+\end{equation}
+
+Usaremos a \eqref{edo_final} para calcular a velocidade exata para
+quando \(t = 5\)
+
+\begin{equation*}
+    \label{edo_solucao_1}
+    V = \frac{2000 - \frac{1}{20} \cdot(200 - 5)^{2}}{2}
+\end{equation*}
+
+\begin{equation*}
+    \label{edo_solucao_2}
+    V = \frac{2000 - 1901.25}{2}
+\end{equation*}
+
+\begin{equation}
+    \label{edo_solucao_final}
+    V = 49.375
+\end{equation}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
