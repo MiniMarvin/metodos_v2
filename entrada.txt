@@ -2,6 +2,9 @@ euler 100 0 0.1 1000 0.7-0.035*y
 euler_inverso 100 0 0.1 1000 0.7-0.035*y
 euler_aprimorado 100 0 0.1 1000 0.7-0.035*y
 runge_kutta 100 0 0.1 1000 0.7-0.035*y
+adam_bashforth_by_runge_kutta 100 0 0.1 1000 0.7-0.035*y 3
+adam_multon_by_runge_kutta 100 0 0.1 1000 0.7-0.035*y 3
+formula_inversa_by_runge_kutta 100 0 0.1 1000 0.7-0.035*y 3
 adam_bashforth_by_runge_kutta 100 0 0.1 1000 0.7-0.035*y 8
 adam_multon_by_runge_kutta 100 0 0.1 1000 0.7-0.035*y 8
 formula_inversa_by_runge_kutta 100 0 0.1 1000 0.7-0.035*y 6
