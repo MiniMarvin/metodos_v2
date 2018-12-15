@@ -1,0 +1,10 @@
+euler 30 0 0.1 1000 12.04-0.602*y
+euler_inverso 30 0 0.1 1000 12.04-0.602*y
+euler_aprimorado 30 0 0.1 1000 12.04-0.602*y
+runge_kutta 30 0 0.1 1000 12.04-0.602*y
+adam_bashforth_by_runge_kutta 30 0 0.1 1000 12.04-0.602*y 3
+adam_multon_by_runge_kutta 30 0 0.1 1000 12.04-0.602*y 3
+formula_inversa_by_runge_kutta 30 0 0.1 1000 12.04-0.602*y 3
+adam_bashforth_by_runge_kutta 30 0 0.1 1000 12.04-0.602*y 8
+adam_multon_by_runge_kutta 30 0 0.1 1000 12.04-0.602*y 8
+formula_inversa_by_runge_kutta 30 0 0.1 1000 12.04-0.602*y 6

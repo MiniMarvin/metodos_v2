@@ -1,0 +1,10 @@
+euler 0 0 0.5 20 (2000-2*y)/(200-t)
+euler_inverso 0 0 0.5 20 (2000-2*y)/(200-t)
+euler_aprimorado 0 0 0.5 20 (2000-2*y)/(200-t)
+runge_kutta 0 0 0.5 20 (2000-2*y)/(200-t)
+adam_bashforth_by_runge_kutta 0 0 0.5 20 (2000-2*y)/(200-t) 3
+adam_multon_by_runge_kutta 0 0 0.5 20 (2000-2*y)/(200-t) 3
+formula_inversa_by_runge_kutta 0 0 0.5 20 (2000-2*y)/(200-t) 3
+adam_bashforth_by_runge_kutta 0 0 0.5 20 (2000-2*y)/(200-t) 8
+adam_multon_by_runge_kutta 0 0 0.5 20 (2000-2*y)/(200-t) 8
+formula_inversa_by_runge_kutta 0 0 0.5 20 (2000-2*y)/(200-t) 6
